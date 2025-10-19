@@ -1,0 +1,252 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    h2.section {
+        color: var(--accent);
+        text-shadow: 0 0 12px var(--accent2);
+        margin-top: 0;
+    }
+
+    .lead {
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #dfefff;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+        margin-top: 1rem;
+    }
+
+    .card {
+        background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+        border-radius: 12px;
+        padding: 1rem;
+        min-height: 120px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+        transition: transform 0.22s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover { transform: translateY(-6px); box-shadow: 0 10px 28px rgba(0,255,255,0.06); }
+
+    ul.tools { padding-left: 1.2rem; }
+    ul.tools li { margin: 0.5rem 0; }
+
+    .hint {
+        font-size: 0.95rem;
+        color: #bcd;
+        background: rgba(0,255,255,0.03);
+        border-left: 3px solid var(--accent2);
+        padding: 0.6rem 0.9rem;
+        border-radius: 8px;
+        margin: 0.6rem 0 1rem 0;
+    }
+
+    .section-sub {
+        font-size: 0.95rem;
+        color: #cfe;
+        margin-bottom: 0.6rem;
+    }
+
+    @media (max-width: 880px) {
+        .grid { grid-template-columns: 1fr; }
+    }
+</style>
+
+{% if tab == 'about' %}
+    <h2 class="section">🔒 Qu'est-ce que la cybersécurité ?</h2>
+    <p class="lead">La cybersécurité est l'ensemble des pratiques, technologies et processus conçus pour protéger les systèmes, réseaux et données contre les attaques, accès non autorisés et dommages. Elle n'est pas seulement technique : elle implique aussi des politiques, de la formation et une culture de la sécurité.</p>
+
+    <div class="grid">
+        <div class="card">
+            <h4 class="section-sub">Principales préoccupations</h4>
+            <ul>
+                <li>Confidentialité : protéger les données sensibles</li>
+                <li>Intégrité : garantir que les données ne sont pas altérées</li>
+                <li>Disponibilité : maintenir les services accessibles</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h4 class="section-sub">Domaines clés</h4>
+            <ul>
+                <li>Sécurité réseau</li>
+                <li>Sécurité applicative</li>
+                <li>Gestion des identités et accès (IAM)</li>
+                <li>Cryptographie</li>
+                <li>Réponse aux incidents</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="hint">
+        Astuce : commence par comprendre le modèle "CIA" (Confidentiality, Integrity, Availability). Beaucoup d'efforts en sécurité découlent de ces trois objectifs.
+    </div>
+
+{% elif tab == 'pentest' %}
+    <h2 class="section">🧯 Pentest (Test d'intrusion)</h2>
+    <p class="lead">Le pentest consiste à simuler des attaques contrôlées pour identifier les faiblesses d'un système avant qu'un attaquant réel ne les exploite. C'est une discipline pratique qui demande méthode, outils et éthique.</p>
+
+    <div class="grid">
+        <div class="card">
+            <h4 class="section-sub">Phases typiques</h4>
+            <ol>
+                <li>Reconnaissance (passive/active)</li>
+                <li>Scan et cartographie (ex : ports, services)</li>
+                <li>Analyse des vulnérabilités</li>
+                <li>Exploitation (si autorisé)</li>
+                <li>Post-exploitation et rapport</li>
+            </ol>
+        </div>
+
+        <div class="card">
+            <h4 class="section-sub">Outils courants</h4>
+            <ul class="tools">
+                <li><b>Nmap</b> — scan de ports et découverte de services</li>
+                <li><b>Burp Suite</b> — proxy pour tester les applis web</li>
+                <li><b>Metasploit</b> — framework d'exploit</li>
+                <li><b>OWASP ZAP</b> — scanner web open-source</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="hint">Éthique : n'effectue jamais de tests d'intrusion sans autorisation explicite.</div>
+
+{% elif tab == 'resources' %}
+    <h2 class="section">🧰 Ressources & Outils</h2>
+    <p class="lead">Liste organisée d'outils et ressources pour apprendre et pratiquer la cybersécurité.</p>
+
+    <div class="grid">
+        <div class="card">
+            <h4 class="section-sub">Outils réseau & reconnaissance</h4>
+            <ul class="tools">
+                <li>Nmap — découverte et scan</li>
+                <li>Masscan — scan ultra-rapide</li>
+                <li>Wireshark — capture et analyse réseau</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h4 class="section-sub">Outils web & application</h4>
+            <ul class="tools">
+                <li>Burp Suite — proxy/interception</li>
+                <li>OWASP ZAP — scanner automatique</li>
+                <li>Dirsearch / dirb — découverte de répertoires</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h4 class="section-sub">Plateformes d'apprentissage</h4>
+            <ul class="tools">
+                <li>TryHackMe, OverTheWire, HackTheBox — laboratoires pratiques</li>
+                <li>OWASP — guides et top 10 des vulnérabilités</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h4 class="section-sub">Conseils</h4>
+            <ul>
+                <li>Commence par les fondamentaux : réseau, systèmes, web.</li>
+                <li>Pratique dans des environnements isolés (VM, labs).</li>
+            </ul>
+        </div>
+    </div>
+
+{% elif tab == 'ctf' %}
+    <h2 class="section">🏆 CTF — Capture The Flag</h2>
+    <p class="lead">Un CTF (Capture The Flag) est un jeu éducatif où les participants résolvent des défis de sécurité pour récupérer des "flags" — des chaînes de texte qui prouvent la réussite d'une épreuve. Les CTF couvrent un large spectre : exploitation binaire, reverse engineering, cryptographie, stéganographie, web, forensics, et plus.</p>
+
+    <div class="grid">
+        <div class="card">
+            <h4 class="section-sub">Catégories de défis</h4>
+            <ul>
+                <li><b>Web</b> — XSS, SQLi, CSRF, logique applicative</li>
+                <li><b>Binary/Exploitation</b> — débordement de buffer, ROP</li>
+                <li><b>Reverse Engineering</b> — analyser un binaire pour comprendre son fonctionnement</li>
+                <li><b>Crypto</b> — casser ou exploiter des schémas cryptographiques faibles</li>
+                <li><b>Forensics</b> — analyse de fichiers/dump pour récupérer des indices</li>
+                <li><b>Stego</b> — cacher des données dans des images/sons</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h4 class="section-sub">Outils utiles pour les CTF</h4>
+            <ul class="tools">
+                <li><b>Burp Suite</b> — pour challenges web</li>
+                <li><b>Ghidra / IDA / radare2</b> — reverse engineering</li>
+                <li><b>pwntools</b> — scripting d'exploits (Python)</li>
+                <li><b>binwalk, foremost</b> — forensics & extraction</li>
+                <li><b>steghide, zsteg</b> — stéganographie</li>
+                <li><b>CyberChef</b> — manipulations de données & encodages</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="hint">Commence par des CTF "Jeopardy" (défis séparés) avant de te lancer dans des CTF "Attack/Defense". Les CTF sont l'école la plus rapide pour progresser en pratique.</div>
+
+{% elif tab == 'code' %}
+    <h2 class="section">💻 Code — Langages & usage en cybersécurité</h2>
+    <p class="lead">La programmation est un outil essentiel pour tout praticien en sécurité : automatisation, écriture d'outils, scripting d'exploits, analyse de code malveillant, etc. Voici les langages les plus utiles et pourquoi.</p>
+
+    <div class="grid">
+        <div class="card">
+            <h4 class="section-sub">Python</h4>
+            <p>Langage incontournable pour scripting, automation, création d'outils, exploitation (pwntools), parsing de logs, et petits serveurs.</p>
+            <ul class="tools">
+                <li>pwntools, scapy, requests</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h4 class="section-sub">Bash / Shell</h4>
+            <p>Indispensable pour automatiser tâches sur Linux, chaining de commandes, scripts d'administration et tests rapides.</p>
+        </div>
+
+        <div class="card">
+            <h4 class="section-sub">C / C++</h4>
+            <p>Utile pour comprendre les vulnérabilités bas niveau (buffer overflow, heap), développement d'exploits et logiciels systèmes.</p>
+        </div>
+
+        <div class="card">
+            <h4 class="section-sub">JavaScript / TypeScript</h4>
+            <p>Important pour la sécurité web (XSS, DOM-based attacks) et l'analyse des applications modernes côté client.</p>
+        </div>
+
+        <div class="card">
+            <h4 class="section-sub">Autres langages</h4>
+            <p>Go — utilisé pour outils réseau rapides ; Rust — sécurité mémoire ; SQL — comprendre injections ; PowerShell — post-exploitation Windows.</p>
+        </div>
+    </div>
+
+    <div class="hint">Conseil : apprends Python + Bash en priorité, puis progresse vers C pour le bas niveau et JavaScript pour le web.</div>
+
+{% else %}
+    <h2 class="section">⚡ Bienvenue sur CyberLab</h2>
+    <p class="lead">Explore le monde de la cybersécurité, pratique via des labs et CTF, et apprends à coder des outils pour mieux comprendre les systèmes.</p>
+
+    <div class="grid">
+        <div class="card">
+            <h4 class="section-sub">Commence ici</h4>
+            <p>Parcours recommandé :</p>
+            <ol>
+                <li>Notions de réseau (TCP/IP, ports)</li>
+                <li>Linux de base & commandes shell</li>
+                <li>Programmation Python</li>
+                <li>Laboratoires et CTF simples</li>
+            </ol>
+        </div>
+
+        <div class="card">
+            <h4 class="section-sub">Objectifs pédagogiques</h4>
+            <ul>
+                <li>Comprendre comment fonctionnent les attaques</li>
+                <li>Apprendre à identifier et corriger des vulnérabilités</li>
+                <li>Développer un esprit critique et éthique</li>
+            </ul>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberLab ⚡</title>
+    <style>
+        /* === Thème Futuriste Cyber === */
+        :root {
+            --bg: #080a1a;
+            --accent: #0ff;
+            --accent2: #6ff;
+            --text: #e0e0e0;
+            --card: rgba(255, 255, 255, 0.05);
+            --blur: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: "Segoe UI", Poppins, sans-serif;
+            background: radial-gradient(circle at top left, #0b0f2e, #05050e 80%);
+            color: var(--text);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,255,255,0.07);
+            z-index: 10;
+        }
+
+        h1 {
+            color: var(--accent);
+            text-shadow: 0 0 15px var(--accent);
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin: 0;
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .logo-dot {
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(45deg, var(--accent), var(--accent2));
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--accent);
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            margin: 0 0.8rem;
+            transition: all 0.25s ease;
+            position: relative;
+            padding: 0.2rem 0.1rem;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            transition: width 0.25s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 2.5rem auto;
+            background: var(--card);
+            border-radius: 18px;
+            padding: 2rem;
+            box-shadow: 0 0 40px rgba(0,255,255,0.06);
+            animation: fadeIn 0.9s ease-in;
+            backdrop-filter: blur(10px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-top: 3rem;
+        }
+
+        /* === Animations === */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glow {
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent2), 0 0 20px var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 720px) {
+            header {
+                padding: 0.8rem 1rem;
+            }
+            nav a { margin: 0 0.5rem; font-size: 0.95rem; }
+            main { margin: 1.5rem; padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><span class="logo-dot"></span> CyberLab</h1>
+        <nav>
+            {% if session.get('user') %}
+                <a href="{{ url_for('home', tab='') }}" class="{% if tab=='' %}active{% endif %}">Accueil</a>
+                <a href="{{ url_for('home', tab='about') }}" class="{% if tab=='about' %}active{% endif %}">Cybersécurité</a>
+                <a href="{{ url_for('home', tab='pentest') }}" class="{% if tab=='pentest' %}active{% endif %}">Pentest</a>
+                <a href="{{ url_for('home', tab='resources') }}" class="{% if tab=='resources' %}active{% endif %}">Ressources</a>
+                <a href="{{ url_for('home', tab='ctf') }}" class="{% if tab=='ctf' %}active{% endif %}">CTF</a>
+                <a href="{{ url_for('home', tab='code') }}" class="{% if tab=='code' %}active{% endif %}">Code</a>
+                <a href="{{ url_for('logout') }}">Déconnexion</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Connexion</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>© 2025 CyberLab — Projet éducatif futuriste sur la cybersécurité</footer>
+</body>
+</html>
